@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Walentynka</title>
+</head>
+<body>
+
+<h1>Czy będziesz moją walentynką? ❤️</h1>
+
+<button onclick="alert('TAK ❤️')">TAK</button>
+<button id="nie">NIE</button>
+
+<script>
+const btn = document.getElementById("nie");
+
+btn.addEventListener("mouseover", () => {
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * window.innerWidth + "px";
+    btn.style.top = Math.random() * window.innerHeight + "px";
+});
+
+btn.addEventListener("click", (e) => e.preventDefault());
+</script>
+
+</body>
+</html>
