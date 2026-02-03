@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Will you be my Valentine?</title>
+  <title>Walentynka</title>
 
   <style>
     body {
@@ -17,92 +17,106 @@
 
     .card {
       background: white;
-      width: 500px;
-      padding: 50px;
-      border-radius: 20px;
+      width: 520px;
+      padding: 55px;
+      border-radius: 25px;
       text-align: center;
-      box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
-    }
-
-    .emoji {
-      font-size: 60px;
-    }
-
-    h1 {
-      font-size: 26px;
-      margin: 20px 0;
-      color: #222;
-    }
-
-    .buttons {
-      margin-top: 30px;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.25);
       position: relative;
-      height: 100px;
     }
 
     button {
       font-size: 18px;
-      padding: 12px 35px;
+      padding: 12px 40px;
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      position: absolute;
-      transition: 0.2s;
+      margin-top: 25px;
+    }
+
+    #startBtn {
+      background: #ff4d7d;
+      color: white;
     }
 
     #yes {
       background: #ff4d7d;
       color: white;
-      left: 120px;
+      margin-right: 15px;
     }
 
     #no {
       background: #ddd;
-      left: 260px;
+      position: absolute;
     }
 
-    .text {
-      margin-top: 50px;
-      font-size: 14px;
-      color: gray;
+    img {
+      width: 320px;
+      margin-top: 25px;
+      border-radius: 15px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card">
-    <div class="emoji">🐱❤️</div>
+  <div class="card" id="card">
 
-    <h1>Czy będziesz moją walentynką?</h1>
+    <!-- EKRAN 1 -->
+    <h1>Mam coś dla Ciebie 😏</h1>
+    <p>Kliknij przycisk...</p>
+    <button id="startBtn">Kliknij tutaj</button>
 
-    <div class="buttons">
-      <button id="yes" onclick="alert('YAY!! ❤️😍')">Yes</button>
-      <button id="no">No</button>
-    </div>
-
-    <div class="text">"No" seems a bit shy 😈</div>
   </div>
 
   <script>
-    const noBtn = document.getElementById("no");
+    const card = document.getElementById("card");
 
-    noBtn.addEventListener("mouseover", () => {
-      const card = document.querySelector(".card");
-      const rect = card.getBoundingClientRect();
+    // Po kliknięciu START → GIF
+    document.getElementById("startBtn").addEventListener("click", () => {
 
-      // losowe miejsce w obrębie karty
-      const x = Math.random() * (rect.width - noBtn.offsetWidth);
-      const y = Math.random() * (rect.height - noBtn.offsetHeight - 100) + 200;
+      card.innerHTML = `
+        <h1>Puk puk puk… hehehe</h1>
+        <img src="puk-gif.gif" alt="viral gif">
+        <p>Moment… jeszcze jedno pytanie</p>
+      `;
 
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
+      // Po 4 sekundach pokazuje walentynkę
+      setTimeout(showValentineQuestion, 4000);
     });
 
-    // blokada kliknięcia
-    noBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-    });
+    // Funkcja pytania TAK/NIE
+    function showValentineQuestion() {
+      card.innerHTML = `
+        <h1>Julia, czy będziesz moją walentynką?❤️</h1>
+
+        <button id="yes">Tak</button>
+        <button id="no">Nie</button>
+
+        <p style="margin-top:40px; color:gray;">
+          „Nie” jest trochę nieśmiałe jak coś
+        </p>
+      `;
+
+      const noBtn = document.getElementById("no");
+      const yesBtn = document.getElementById("yes");
+
+      // Uciekanie przycisku NIE
+      noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 300;
+        const y = Math.random() * 200;
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+      });
+
+      // Klik TAK → końcówka
+      yesBtn.addEventListener("click", () => {
+        card.innerHTML = `
+          <h1>Git, randka zaplanowana</h1>
+          <p>Alternatywnie możemy zrobić skok na fabrykę jaboli...</p>
+        `;
+      });
+    }
   </script>
 
 </body>
