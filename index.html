@@ -1,27 +1,109 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <title>Walentynka</title>
+  <meta charset="UTF-8">
+  <title>Will you be my Valentine?</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f8c8d8;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background: white;
+      width: 500px;
+      padding: 50px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .emoji {
+      font-size: 60px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin: 20px 0;
+      color: #222;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 100px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 35px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.2s;
+    }
+
+    #yes {
+      background: #ff4d7d;
+      color: white;
+      left: 120px;
+    }
+
+    #no {
+      background: #ddd;
+      left: 260px;
+    }
+
+    .text {
+      margin-top: 50px;
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>Czy będziesz moją walentynką? ❤️</h1>
+  <div class="card">
+    <div class="emoji">🐱❤️</div>
 
-<button onclick="alert('TAK ❤️')">TAK</button>
-<button id="nie">NIE</button>
+    <h1>Czy będziesz moją walentynką?</h1>
 
-<script>
-const btn = document.getElementById("nie");
+    <div class="buttons">
+      <button id="yes" onclick="alert('YAY!! ❤️😍')">Yes</button>
+      <button id="no">No</button>
+    </div>
 
-btn.addEventListener("mouseover", () => {
-    btn.style.position = "absolute";
-    btn.style.left = Math.random() * window.innerWidth + "px";
-    btn.style.top = Math.random() * window.innerHeight + "px";
-});
+    <div class="text">"No" seems a bit shy 😈</div>
+  </div>
 
-btn.addEventListener("click", (e) => e.preventDefault());
-</script>
+  <script>
+    const noBtn = document.getElementById("no");
+
+    noBtn.addEventListener("mouseover", () => {
+      const card = document.querySelector(".card");
+      const rect = card.getBoundingClientRect();
+
+      // losowe miejsce w obrębie karty
+      const x = Math.random() * (rect.width - noBtn.offsetWidth);
+      const y = Math.random() * (rect.height - noBtn.offsetHeight - 100) + 200;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    // blokada kliknięcia
+    noBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+  </script>
 
 </body>
 </html>
